@@ -98,14 +98,14 @@ class ViewController: UIViewController {
         print("Question No : \(questionNumber+1)")
         
         if (answerPicked == correctAnswer) {
-            print("You are right !!")
+             ProgressHUD.showSuccess("Correct Answer!")
              currentScore = currentScore + 1*100/Float(totalNoOfQuestions)
         
             print("Current Score :\(currentScore)")
             
         }
         else {
-            print("Sorry you are wrong. Please move to next Question.")
+             ProgressHUD.showError("Incorrect Answer")
            
         }
         updateUI()
