@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var questionNumber : Int = 0
     var totalNoOfQuestions : Int = 0
     var currentScore : Float = 0
+ //   var ABC : CGFloat = 0
     
     
     @IBOutlet weak var questionLabel: UILabel!
@@ -33,9 +34,15 @@ class ViewController: UIViewController {
         let firstQuestion = allQuestions.listOfQuestions[0]
         questionLabel.text = firstQuestion.question
         scoreLabel.text = String(format : "%.2f", currentScore)
-        scoreLabel.text = "Score :" + scoreLabel.text! + "%"
+        scoreLabel.text = "Score : " + scoreLabel.text! + "%"
         progressLabel.text = "\(questionNumber+1)/ \(totalNoOfQuestions)"
         
+  //      ABC = view.frame.size.width / CGFloat(totalNoOfQuestions)
+        
+    //    print("total width :\(view.frame.size.width)")
+//         print("each width: \(ABC)")
+//        progressBar.frame.size.width = ABC
+//
     }
 
 
@@ -55,18 +62,22 @@ class ViewController: UIViewController {
     
     
     func updateUI() {
-      
+        progressLabel.text = "\(questionNumber+1)/ \(totalNoOfQuestions)"
+        scoreLabel.text = String(format : "%.2f", currentScore)
+        scoreLabel.text = "Score : " + scoreLabel.text! + "%"
+      //  print("Question Number in Update UI: \(questionNumber + 1)")
+       
+        print(view.frame.size.width)
+        progressBar.frame.size.width = (view.frame.size.width / CGFloat(totalNoOfQuestions)) * CGFloat(questionNumber + 1 )
+        print(progressBar.frame.size.width)
     }
     
 
     func nextQuestion() {
-        
-        
-        
+    
         if questionNumber < totalNoOfQuestions  {
             questionLabel.text = allQuestions.listOfQuestions[questionNumber].question
-            progressLabel.text = "\(questionNumber+1)/ \(totalNoOfQuestions)"
-
+            
         }
         else {
             print("You have reached to the end of the test")
@@ -92,13 +103,12 @@ class ViewController: UIViewController {
         
             print("Current Score :\(currentScore)")
             
-            scoreLabel.text = String(format : "%.2f", currentScore)
-            scoreLabel.text = "Score : " + scoreLabel.text! + "%"
-            
         }
         else {
             print("Sorry you are wrong. Please move to next Question.")
+           
         }
+        updateUI()
         questionNumber = questionNumber + 1
        
     }
@@ -106,7 +116,9 @@ class ViewController: UIViewController {
     
     func startOver() {
        questionNumber = 0
-        nextQuestion()
+       currentScore = 0
+     //   nextQuestion()
+        viewDidLoad()
         
     }
     
