@@ -33,6 +33,7 @@ class ViewController: UIViewController {
         let firstQuestion = allQuestions.listOfQuestions[0]
         questionLabel.text = firstQuestion.question
         scoreLabel.text = String(format : "%.2f", currentScore)
+        scoreLabel.text = "Score :" + scoreLabel.text! + "%"
         progressLabel.text = "\(questionNumber+1)/ \(totalNoOfQuestions)"
         
     }
@@ -87,9 +88,13 @@ class ViewController: UIViewController {
         
         if (answerPicked == correctAnswer) {
             print("You are right !!")
-            currentScore = currentScore + 1
+             currentScore = currentScore + 1*100/Float(totalNoOfQuestions)
+        
             print("Current Score :\(currentScore)")
-            scoreLabel.text = "\(currentScore)"
+            
+            scoreLabel.text = String(format : "%.2f", currentScore)
+            scoreLabel.text = "Score : " + scoreLabel.text! + "%"
+            
         }
         else {
             print("Sorry you are wrong. Please move to next Question.")
